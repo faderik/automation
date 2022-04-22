@@ -10,8 +10,8 @@ urlForRbtk = 'https://docs.google.com/forms/d/e/1FAIpQLSdLDK-9wFbZVjnVEJpwCHOa-s
 
 yourTeam = 'KRSBI-Beroda IRIS'
 minutes = ['00', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
-sarans = ['Terimakasih', 'Jos', 'Mantap', '.', '...']
-names = ['Faderik', 'Taufik Hidayat', 'Azzam Wildan', 'Rama', 'Danen', 'Ian']
+sarans = ['Terimakasih', 'Jos', 'Mantap', '.', '...', 'Oke', 'Alhamdulillah', ' ', 'Makasih', 'Trimakasih', 'Trims']
+names = ['Hafiz', 'Taufik Hidayat', 'Azzam Wildan', 'Rama', 'Danen', 'Ian']
 
 def submitLog() :
     reqBody = {
@@ -47,14 +47,25 @@ def submitRbtk() :
         data= reqBody
     )
 
-for yourName in names:
-    logRes = submitLog()
+def main():
+    print("Gasssken Bismillah\n\n")
 
-    if(logRes.status_code == 200):
-        print('Log succes for : ' + yourName)
+    listNameFile = open('name.txt', 'r')
+    for line in listNameFile:
+        names.append(line.rstrip())
+    print(names)
 
-        rbtkRes = submitRbtk()
-        if(rbtkRes.status_code == 200):
-            print('Submit succes for : ' + yourName)
-        else :
-            print('Submit failed for : ' + yourName)
+    for yourName in names:
+        logRes = submitLog()
+
+        if(logRes.status_code == 200):
+            print('Log succes for : ' + yourName)
+
+            rbtkRes = submitRbtk()
+            if(rbtkRes.status_code == 200):
+                print('Submit succes for : ' + yourName)
+            else :
+                print('Submit failed for : ' + yourName)
+
+if __name__ == "__main__":
+    main()
