@@ -13,7 +13,7 @@ minutes = ['00', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
 sarans = ['Terimakasih', 'Jos', 'Mantap', '.', '...', 'Oke', 'Alhamdulillah', ' ', 'Makasih', 'Trimakasih', 'Trims']
 names = ['Hafiz', 'Taufik Hidayat', 'Azzam Wildan', 'Rama', 'Danen', 'Ian']
 
-def submitLog() :
+def submitLog(yourName) :
     reqBody = {
         'entry.2042940715_year' : '2022',
         'entry.2042940715_month' : '4',
@@ -30,7 +30,7 @@ def submitLog() :
         data= reqBody
     )
 
-def submitRbtk() :
+def submitRbtk(yourName) :
     reqBody = {
         'entry.1474663762_year' : '2022',
         'entry.1474663762_month' : '4',
@@ -56,16 +56,20 @@ def main():
     print(names)
 
     for yourName in names:
-        logRes = submitLog()
+        logRes = submitLog(yourName)
 
         if(logRes.status_code == 200):
             print('Log succes for : ' + yourName)
 
-            rbtkRes = submitRbtk()
+            rbtkRes = submitRbtk(yourName)
             if(rbtkRes.status_code == 200):
                 print('Submit succes for : ' + yourName)
             else :
                 print('Submit failed for : ' + yourName)
+        else :
+            print('Log failed !!!')
+            break;
+
 
 if __name__ == "__main__":
     main()
